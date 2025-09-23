@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Void by SAK | Tour</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Welcome to the official website of Void. Social Network for a World of Problem-Solvers." />
+    <meta name="author" content="Shoaib Ali" />
+    <link rel="icon" href="https://shoaibali43.github.io/website/logo.png" type="image/png" />
+    
+    <!-- Open Graph / Facebook / WhatsApp / Instagram -->
+    <meta property="og:title" content="Void | by SAK" />
+    <meta property="og:description" content="Social Network for a World of Problem-Solvers." />
+    <meta property="og:image" content="https://shoaibali43.github.io/website/logo.png" />
+    <meta property="og:url" content="https://shoaibali43.github.io/website" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Void by SAK" />
+    
+    <!-- Twitter Card (in case someone shares on Twitter) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Void | by SAK" />
+    <meta name="twitter:description" content="Social Network for a World of Problem-Solvers." />
+    <meta name="twitter:image" content="https://shoaibali43.github.io/website/logo.png" />
+    <meta name="twitter:site" content="@exploremiracles" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #9ca3af;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f2c3d, #1a1a40);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Animated Background Elements */
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .math-element {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.15);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            user-select: none;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            border: 1px solid rgba(100, 200, 255, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .grid-line {
+            position: absolute;
+            background: rgba(100, 200, 255, 0.03);
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .logo h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #4ade80, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+        }
+
+        .logo p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards Container */
+        .cards-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin-bottom: 40px;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--dark);
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            opacity: 0;
+        }
+
+        .card.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg) scale(1);
+            z-index: 5;
+        }
+
+        .card.next {
+            opacity: 0.7;
+            transform: translateX(40%) scale(0.9);
+            z-index: 4;
+        }
+
+        .card.prev {
+            opacity: 0.7;
+            transform: translateX(-40%) scale(0.9);
+            z-index: 4;
+        }
+
+        .card.hidden {
+            opacity: 0;
+            transform: translateX(120%) scale(0.8);
+            z-index: 3;
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        /* Navigation */
+        .navigation {
+            display: flex;
+            gap: 15px;
+            margin-top: -30px;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn i {
+            margin-right: 8px;
+        }
+
+        .skip-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .skip-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .next-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        .finish-btn {
+            background: linear-gradient(to right, var(--success), #059669);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .finish-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Progress Indicators */
+        .progress {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(5px, -5px) rotate(2deg);
+            }
+
+            50% {
+                transform: translate(0, -10px) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-5px, -5px) rotate(-2deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2.5rem;
+            }
+
+            .cards-container {
+                height: 300px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-icon {
+                font-size: 3rem;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            .card p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+
+            .logo p {
+                font-size: 1rem;
+            }
+
+            .cards-container {
+                height: 500px;
+            }
+
+            .navigation {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-elements" id="backgroundElements"></div>
+
+    <div class="container">
+        <div class="logo">
+            <h1>Void <sup> <small>by</small> SAK</sup> </h1>
+            <p>Collective Problem Solving</p>
+        </div>
+
+        <div class="progress" id="progress">
+            <div class="progress-dot active"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+            <div class="progress-dot"></div>
+        </div>
+
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card active" id="card1">
+                <div class="card-icon">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <h2>Post Unsolved Problems</h2>
+                <p>A space where anyone can share real-world challenges that don’t have clear solutions yet.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card next" id="card2">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2>Collective Brainstorming</h2>
+                <p>People from different backgrounds can comment, suggest, and refine ideas together in real time.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card hidden" id="card3">
+                <div class="card-icon">
+                    <i class="fa-solid fa-tag"></i>
+                </div>
+                <h2>Tag-Based Discovery</h2>
+                <p>Problems are organized with tags, making it easy to explore trending topics or focus on what interests you most.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card hidden" id="card4">
+                <div class="card-icon">
+                    <i class="fa-solid fa-circle-nodes"></i>
+                </div>
+                <h2>Stay Connected</h2>
+                <p>Join our platform to be the first to experience new updates and features as we continue to grow and improve.
+                </p>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn skip-btn" id="skipBtn">
+                <i class="fas fa-forward"></i> Skip Intro
+            </button>
+            <button class="nav-btn next-btn" id="nextBtn">
+                <i class="fas fa-arrow-right"></i> Next
+            </button>
+            <button class="nav-btn finish-btn" id="finishBtn" style="display: none;">
+                <i class="fas fa-check"></i> Get Started
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Create animated background elements
+        function createBackgroundElements() {
+            const container = document.getElementById('backgroundElements');
+
+            // Create grid lines
+            for (let i = 0; i < 20; i++) {
+                const line = document.createElement('div');
+                line.className = 'grid-line';
+
+                if (i % 2 === 0) {
+                    // Horizontal lines
+                    line.style.width = '100%';
+                    line.style.height = '1px';
+                    line.style.top = `${(i / 20) * 100}%`;
+                    line.style.left = '0';
+                } else {
+                    // Vertical lines
+                    line.style.width = '1px';
+                    line.style.height = '100%';
+                    line.style.left = `${(i / 20) * 100}%`;
+                    line.style.top = '0';
+                }
+
+                container.appendChild(line);
+            }
+
+            // Create mathematical equations
+            const equations = [
+                '∫x²dx = x³/3 + C',
+                'e^(iπ) + 1 = 0',
+                'F = ma',
+                'E = mc²',
+                'a² + b² = c²',
+                '∇·E = ρ/ε₀',
+                '∇×B = μ₀J + μ₀ε₀∂E/∂t',
+                'ψ = e^(i(kx - ωt))',
+                'HΨ = EΨ',
+                'S = k log W'
+            ];
+
+            for (let i = 0; i < 15; i++) {
+                const equation = document.createElement('div');
+                equation.className = 'math-element';
+                equation.textContent = equations[Math.floor(Math.random() * equations.length)];
+                equation.style.fontSize = `${14 + Math.random() * 10}px`;
+                equation.style.top = `${Math.random() * 100}%`;
+                equation.style.left = `${Math.random() * 100}%`;
+                equation.style.opacity = `${0.1 + Math.random() * 0.1}`;
+
+                // Animation
+                const duration = 30 + Math.random() * 60;
+                equation.style.animation = `float ${duration}s linear infinite`;
+
+                container.appendChild(equation);
+            }
+
+            // Create geometric shapes
+            for (let i = 0; i < 10; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'shape';
+
+                const size = 20 + Math.random() * 100;
+                shape.style.width = `${size}px`;
+                shape.style.height = `${size}px`;
+                shape.style.top = `${Math.random() * 100}%`;
+                shape.style.left = `${Math.random() * 100}%`;
+
+                // Random border color with low opacity
+                const colors = [
+                    'rgba(96, 165, 250, 0.1)',
+                    'rgba(139, 92, 246, 0.1)',
+                    'rgba(16, 185, 129, 0.1)',
+                    'rgba(245, 158, 11, 0.1)',
+                    'rgba(239, 68, 68, 0.1)'
+                ];
+                shape.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
+
+                // Animation
+                const duration = 20 + Math.random() * 40;
+                shape.style.animation = `rotate ${duration}s linear infinite, pulse ${duration / 2}s ease-in-out infinite alternate`;
+
+                container.appendChild(shape);
+            }
+
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0% {
+                        transform: translate(0, 0) rotate(0deg);
+                    }
+                    25% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg);
+                    }
+                    50% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg);
+                    }
+                    75% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg);
+                    }
+                    100% {
+                        transform: translate(0, 0) rotate(360deg);
+                    }
+                }
+                
+                @keyframes rotate {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+                
+                @keyframes pulse {
+                    0% {
+                        transform: scale(1);
+                    }
+                    100% {
+                        transform: scale(1.1);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize background elements
+        createBackgroundElements();
+
+        // Card navigation logic
+        const cards = document.querySelectorAll('.card');
+        const progressDots = document.querySelectorAll('.progress-dot');
+        const nextBtn = document.getElementById('nextBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const finishBtn = document.getElementById('finishBtn');
+        let currentCardIndex = 0;
+
+        // Update card positions and active states
+        function updateCards() {
+            cards.forEach((card, index) => {
+                card.classList.remove('active', 'next', 'prev', 'hidden');
+                
+                if (index === currentCardIndex) {
+                    card.classList.add('active');
+                } else if (index === currentCardIndex + 1) {
+                    card.classList.add('next');
+                } else if (index === currentCardIndex - 1) {
+                    card.classList.add('prev');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Update progress dots
+            progressDots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentCardIndex) {
+                    dot.classList.add('active');
+                }
+            });
+            
+            // Show/hide buttons based on current card
+            if (currentCardIndex === cards.length - 1) {
+                nextBtn.style.display = 'none';
+                finishBtn.style.display = 'flex';
+            } else {
+                nextBtn.style.display = 'flex';
+                finishBtn.style.display = 'none';
+            }
+        }
+
+        // Next button click handler
+        nextBtn.addEventListener('click', () => {
+            if (currentCardIndex < cards.length - 1) {
+                currentCardIndex++;
+                updateCards();
+            }
+        });
+
+        // Skip button click handler
+        skipBtn.addEventListener('click', () => {
+            window.location.href = 'indexz.html';
+        });
+
+        // Finish button click handler
+        finishBtn.addEventListener('click', () => {
+            window.location.href = 'indexz.html';
+        });
+
+        // Initialize cards
+        updateCards();
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentCardIndex < cards.length - 1) {
+                currentCardIndex++;
+                updateCards();
+            } else if (e.key === 'ArrowLeft' && currentCardIndex > 0) {
+                currentCardIndex--;
+                updateCards();
+            } else if (e.key === 'Escape') {
+                window.location.href = 'indexz.html';
+            }
+        });
+
+        // Add swipe support for touch devices
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const minSwipeDistance = 50; // Minimum distance for a swipe to be registered
+            
+            if (touchEndX < touchStartX - minSwipeDistance && currentCardIndex < cards.length - 1) {
+                // Swipe left - next card
+                currentCardIndex++;
+                updateCards();
+            }
+            
+            if (touchEndX > touchStartX + minSwipeDistance && currentCardIndex > 0) {
+                // Swipe right - previous card
+                currentCardIndex--;
+                updateCards();
+            }
+        }
+    </script>
+</body>
+
+</html>
