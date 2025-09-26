@@ -3,8 +3,28 @@
 
 <head>
     <title>Void by SAK | Login and Sign up</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Welcome to the official website of Void. Social Network for a World of Problem-Solvers." />
+    <meta name="author" content="Shoaib Ali" />
+   <link rel="icon" type="image/png" href="images.png">
+    
+    
+    <meta property="og:title" content="Void | by SAK" />
+    <meta property="og:description" content="Social Network for a World of Problem-Solvers." />
+    <meta property="og:image" content="https://shoaibali43.github.io/website/logo.png" />
+    <meta property="og:url" content="https://shoaibali43.github.io/website" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Void by SAK" />
+    
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Void | by SAK" />
+    <meta name="twitter:description" content="Social Network for a World of Problem-Solvers." />
+    <meta name="twitter:image" content="https://shoaibali43.github.io/website/logo.png" />
+    <meta name="twitter:site" content="@exploremiracles" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -30,11 +50,12 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #0f2c3d, #1a1a40);
-            padding: 15px;
+            padding: 20px;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
+        
         .background-elements {
             position: absolute;
             top: 0;
@@ -52,8 +73,6 @@
             font-weight: bold;
             user-select: none;
             z-index: 0;
-            font-size: 12px !important;
-            /* Smaller on mobile */
         }
 
         .shape {
@@ -61,9 +80,6 @@
             border: 1px solid rgba(100, 200, 255, 0.1);
             border-radius: 50%;
             z-index: 0;
-            max-width: 60px;
-            /* Smaller shapes on mobile */
-            max-height: 60px;
         }
 
         .grid-line {
@@ -74,24 +90,29 @@
 
         .container {
             width: 100%;
-            max-width: 450px;
-            /* More compact max width */
+            max-width: 1000px;
             z-index: 10;
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            align-items: center;
+            gap: 40px;
         }
 
         .logo-container {
-            text-align: center;
-            padding: 0 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            text-align: left;
+            margin-bottom: 30px;
         }
 
         .logo h1 {
-            font-size: 2.2rem;
-            /* Smaller on mobile */
+            font-size: 3rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             background: linear-gradient(to right, #4ade80, #60a5fa, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
@@ -103,25 +124,24 @@
 
         .logo p {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            /* Smaller on mobile */
+            font-size: 1.4rem;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             font-weight: 300;
-            letter-spacing: 0.3px;
-            line-height: 1.3;
+            letter-spacing: 0.5px;
+            max-width: 300px;
+            line-height: 1.4;
         }
 
         .card-container {
-            width: 100%;
+            flex: 1;
+            max-width: 420px;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 1.5rem;
-            /* Reduced padding */
-            border-radius: 20px;
-            /* Slightly smaller radius */
-            box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25),
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             animation: fadeIn 0.5s ease-out;
@@ -149,27 +169,22 @@
         .tabs {
             display: flex;
             background: #f3f4f6;
-            border-radius: 12px;
-            /* Slightly smaller */
-            padding: 5px;
-            margin-bottom: 1.5rem;
-            /* Reduced margin */
+            border-radius: 14px;
+            padding: 6px;
+            margin-bottom: 2rem;
             position: relative;
             z-index: 2;
         }
 
         .tabs button {
             flex: 1;
-            padding: 10px;
-            /* Reduced padding */
+            padding: 12px;
             background: none;
             border: none;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.9rem;
-            /* Smaller font */
-            border-radius: 8px;
-            /* Smaller radius */
+            font-size: 1rem;
+            border-radius: 10px;
             z-index: 2;
             transition: color 0.3s;
             color: var(--gray);
@@ -181,11 +196,11 @@
 
         .slider {
             position: absolute;
-            height: calc(100% - 10px);
-            width: calc(50% - 5px);
+            height: calc(100% - 12px);
+            width: calc(50% - 6px);
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             z-index: 1;
         }
@@ -211,41 +226,32 @@
 
         h2 {
             color: var(--dark);
-            margin-bottom: 1.2rem;
-            /* Reduced margin */
-            font-size: 1.3rem;
-            /* Smaller heading */
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
         .input-group {
             position: relative;
-            margin-bottom: 1rem;
-            /* Reduced margin */
+            margin-bottom: 1.25rem;
             z-index: 2;
         }
 
         .input-group i {
             position: absolute;
-            left: 14px;
-            /* Adjusted position */
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: black;
             z-index: 2;
-            font-size: 0.9rem;
-            /* Smaller icons */
         }
 
         input {
             width: 100%;
-            padding: 14px 14px 14px 40px;
-            /* More compact padding */
+            padding: 16px 16px 16px 48px;
             border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            /* Slightly smaller */
-            font-size: 0.9rem;
-            /* Smaller font */
+            border-radius: 14px;
+            font-size: 1rem;
             transition: all 0.3s;
             background: white;
             position: relative;
@@ -267,8 +273,7 @@
         }
 
         .input-feedback {
-            font-size: 0.75rem;
-            /* Smaller feedback text */
+            font-size: 0.8rem;
             margin-top: 0.25rem;
             padding-left: 0.5rem;
             display: flex;
@@ -276,8 +281,8 @@
         }
 
         .input-feedback i {
-            margin-right: 0.4rem;
-            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
             position: static;
             transform: none;
         }
@@ -292,23 +297,19 @@
 
         button.action-btn {
             width: 100%;
-            padding: 14px;
-            /* More compact button */
-            margin-top: 8px;
+            padding: 16px;
+            margin-top: 10px;
             background: linear-gradient(to right, var(--primary), var(--primary-dark));
             border: none;
             color: white;
             font-weight: 600;
-            border-radius: 12px;
-            /* Slightly smaller */
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
             position: relative;
             z-index: 2;
             overflow: hidden;
-            font-size: 0.9rem;
-            /* Smaller button text */
         }
 
         button.action-btn:disabled {
@@ -349,13 +350,10 @@
         }
 
         .message {
-            margin-top: 0.8rem;
-            /* Reduced margin */
-            padding: 10px;
-            /* More compact */
-            border-radius: 8px;
-            font-size: 0.85rem;
-            /* Smaller text */
+            margin-top: 1rem;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
             text-align: center;
             display: none;
             position: relative;
@@ -374,13 +372,12 @@
             border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
+
         .footer {
             text-align: center;
-            margin-top: 1.5rem;
-            /* Reduced margin */
+            margin-top: 2rem;
             color: var(--gray);
-            font-size: 0.85rem;
-            /* Smaller text */
+            font-size: 0.9rem;
             position: relative;
             z-index: 2;
         }
@@ -422,77 +419,65 @@
             }
         }
 
-        /* Improved mobile responsiveness */
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
 
+        @media (max-width: 900px) {
             .container {
-                max-width: 100%;
+                flex-direction: column;
+                gap: 20px;
             }
 
-            .card {
-                padding: 1.2rem;
-                /* Even more compact on very small screens */
-                border-radius: 16px;
-            }
-
-            .logo h1 {
-                font-size: 1.8rem;
+            .logo {
+                text-align: center;
             }
 
             .logo p {
-                font-size: 0.9rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
-            }
-
-            input {
-                padding: 12px 12px 12px 36px;
-                font-size: 0.85rem;
-            }
-
-            .input-group i {
-                left: 12px;
-                font-size: 0.8rem;
-            }
-
-            button.action-btn {
-                padding: 12px;
-                font-size: 0.85rem;
-            }
-
-            .tabs button {
-                font-size: 0.85rem;
-                padding: 8px;
+                max-width: 100%;
+                margin: 0 auto;
             }
         }
 
-        @media (max-width: 350px) {
+        @media (max-width: 768px){
+
+            .container {
+            gap: 10px;
+        } 
             .logo h1 {
-                font-size: 1.6rem;
-            }
+            font-size: 2.5rem;
+            font-weight: 800;
+             }
+              .logo p {
+            font-size: 1rem;
+              }
 
-            .card {
-                padding: 1rem;
-            }
+        h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+         button.action-btn {
+            padding: 10px;
+         }
+         input {
+            font-size: 0.8rem;
+         }
+         .tabs button {
+            font-size: 0.8rem;
+         }
 
-            input {
-                padding: 10px 10px 10px 32px;
-            }
         }
 
-        /* Prevent zoom on input focus for iOS */
-        @media screen and (-webkit-min-device-pixel-ratio:0) {
+        @media (max-width: 480px) {
+            .card {
+                padding: 2rem 1.5rem;
+            }
 
-            select,
-            textarea,
+            .logo h1 {
+                font-size: 2rem;
+            }
+
             input {
-                font-size: 16px !important;
+                padding: 14px 14px 14px 44px;
             }
         }
     </style>
@@ -517,6 +502,7 @@
                     <button id="signupTab">Sign Up</button>
                 </div>
 
+                
                 <div id="loginForm" class="form active">
                     <h2>Welcome back</h2>
 
@@ -534,11 +520,13 @@
 
                     <div id="loginMessage" class="message"></div>
 
+
                     <div class="footer">
                         <a href="forgot.html">Forgot your password?</a>
                     </div>
                 </div>
 
+                
                 <div id="signupForm" class="form">
                     <h2>Create account</h2>
 
@@ -566,19 +554,20 @@
         </div>
     </div>
 
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script>
         // Firebase Configuration (replace with your actual config)
         var firebaseConfig = {
-           apiKey: "AIzaSyAxQoFW6QiaazIcvkEPsYbnTv7zfKe8c-Y",
-            authDomain: "patternetweb.firebaseapp.com",
-            projectId: "patternetweb",
-            storageBucket: "patternetweb.firebasestorage.app",
-            messagingSenderId: "78400752693",
-            appId: "1:78400752693:web:540fbbcab615e6b078b57c"
-        };
+                apiKey: "AIzaSyAxQoFW6QiaazIcvkEPsYbnTv7zfKe8c-Y",
+                authDomain: "patternetweb.firebaseapp.com",
+                projectId: "patternetweb",
+                storageBucket: "patternetweb.firebasestorage.app",
+                messagingSenderId: "78400752693",
+                appId: "1:78400752693:web:540fbbcab615e6b078b57c"
+            };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -586,12 +575,12 @@
         const db = firebase.firestore();
     </script>
     <script>
-        // Create animated background elements (optimized for mobile)
+        // Create animated background elements
         function createBackgroundElements() {
             const container = document.getElementById('backgroundElements');
 
-            // Create fewer grid lines on mobile
-            for (let i = 0; i < 12; i++) {
+            // Create grid lines
+            for (let i = 0; i < 20; i++) {
                 const line = document.createElement('div');
                 line.className = 'grid-line';
 
@@ -599,35 +588,38 @@
                     // Horizontal lines
                     line.style.width = '100%';
                     line.style.height = '1px';
-                    line.style.top = `${(i / 12) * 100}%`;
+                    line.style.top = `${(i / 20) * 100}%`;
                     line.style.left = '0';
                 } else {
                     // Vertical lines
                     line.style.width = '1px';
                     line.style.height = '100%';
-                    line.style.left = `${(i / 12) * 100}%`;
+                    line.style.left = `${(i / 20) * 100}%`;
                     line.style.top = '0';
                 }
 
                 container.appendChild(line);
             }
 
-            // Create mathematical equations (fewer on mobile)
+            // Create mathematical equations
             const equations = [
-                'E = mc²',
-                'F = ma',
-                'a² + b² = c²',
-                '?·E = ?/e0',
-                '?·B = 0',
-                'ih??/?t = H?',
-                'PV = nRT'
+                'E = mc²',                                  // Einstein’s mass-energy equivalence
+                'F = ma',                                   // Newton’s second law of motion
+                'a² + b² = c²',                             // Pythagoras theorem (geometry basis for vectors)
+                '∇·E = ρ/ε₀',                               // Gauss’s law for electric fields
+                '∇·B = 0',                                  // Gauss’s law for magnetism
+                '∇×E = -∂B/∂t',                             // Faraday’s law of induction
+                '∇×B = μ₀J + μ₀ε₀∂E/∂t',                     // Ampère-Maxwell law
+                'iħ∂Ψ/∂t = HΨ',                             // Schrödinger equation (quantum mechanics)
+                'ΔG = ΔH - TΔS',                            // Gibbs free energy (thermodynamics/chemistry)
+                'PV = nRT'                                  // Ideal gas law (chemistry/thermodynamics)
             ];
 
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 15; i++) {
                 const equation = document.createElement('div');
                 equation.className = 'math-element';
                 equation.textContent = equations[Math.floor(Math.random() * equations.length)];
-                equation.style.fontSize = `${10 + Math.random() * 8}px`;
+                equation.style.fontSize = `${14 + Math.random() * 10}px`;
                 equation.style.top = `${Math.random() * 100}%`;
                 equation.style.left = `${Math.random() * 100}%`;
                 equation.style.opacity = `${0.1 + Math.random() * 0.1}`;
@@ -639,12 +631,12 @@
                 container.appendChild(equation);
             }
 
-            // Create geometric shapes (fewer and smaller on mobile)
-            for (let i = 0; i < 6; i++) {
+            // Create geometric shapes
+            for (let i = 0; i < 10; i++) {
                 const shape = document.createElement('div');
                 shape.className = 'shape';
 
-                const size = 15 + Math.random() * 45;
+                const size = 20 + Math.random() * 100;
                 shape.style.width = `${size}px`;
                 shape.style.height = `${size}px`;
                 shape.style.top = `${Math.random() * 100}%`;
@@ -675,13 +667,13 @@
                         transform: translate(0, 0) rotate(0deg);
                     }
                     25% {
-                        transform: translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 - 25}px) rotate(90deg);
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg);
                     }
                     50% {
-                        transform: translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 - 25}px) rotate(180deg);
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg);
                     }
                     75% {
-                        transform: translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 - 25}px) rotate(270deg);
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg);
                     }
                     100% {
                         transform: translate(0, 0) rotate(360deg);
