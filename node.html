@@ -1392,16 +1392,29 @@
             const editBtn = nodeElement.querySelector('[data-action="edit"]');
             const connectBtn = nodeElement.querySelector('[data-action="connect"]');
             
-            if (editBtn) {
+           if (editBtn) {
+                // Add both click and touch events
                 editBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     selectNode(node);
                     togglePanel(propertiesPanel, true);
                 });
+
+                editBtn.addEventListener('touchend', (e) => {
+                    e.stopPropagation();
+                    selectNode(node);
+                    togglePanel(propertiesPanel, true);
+                });
             }
-            
+
             if (connectBtn) {
+                // Add both click and touch events
                 connectBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    startConnection(node);
+                });
+
+                connectBtn.addEventListener('touchend', (e) => {
                     e.stopPropagation();
                     startConnection(node);
                 });
@@ -1443,62 +1456,88 @@
 
         // Start dragging a node
     // Start dragging a node (both mouse and touch)
-    function startNodeDrag(e) {
-        // Prevent default for touch events
-        if (e.type === 'touchstart') {
-            e.preventDefault();
-        }
-
-        if (e.target.classList.contains('node-action')) return;
-
-        const nodeId = e.currentTarget.id;
-        const node = nodes.find(n => n.id === nodeId);
-        if (!node) return;
-
-        selectNode(node);
-
-        // Get initial coordinates based on event type
-        const startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-        const startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-        const startNodeX = node.x;
-        const startNodeY = node.y;
-
-        function dragNode(moveEvent) {
-            // Get current coordinates based on event type
-            const currentX = moveEvent.type.includes('mouse') ? moveEvent.clientX : moveEvent.touches[0].clientX;
-            const currentY = moveEvent.type.includes('mouse') ? moveEvent.clientY : moveEvent.touches[0].clientY;
-
-            const dx = currentX - startX;
-            const dy = currentY - startY;
-
-            node.x = startNodeX + dx;
-            node.y = startNodeY + dy;
-
-            const nodeElement = document.getElementById(node.id);
-            if (nodeElement) {
-                nodeElement.style.left = node.x + 'px';
-                nodeElement.style.top = node.y + 'px';
+    // Start dragging a node (both mouse and touch)
+        function startNodeDrag(e) {
+            // Check if the click is on a node action button
+            if (e.target.classList.contains('node-action')) {
+                return; // Don't start drag if clicking on action buttons
             }
 
-            updateConnections();
-        }
+            // Prevent default for touch events only if not on action button
+            if (e.type === 'touchstart') {
+                e.preventDefault();
+            }
 
-        function stopDrag() {
-            document.removeEventListener('mousemove', dragNode);
-            document.removeEventListener('touchmove', dragNode);
-            document.removeEventListener('mouseup', stopDrag);
+            const nodeId = e.currentTarget.id;
+            const node = nodes.find(n => n.id === nodeId);
+            if (!node) return;
+
+            selectNode(node);
+
+            // Get initial coordinates based on event type
+            const startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            const startNodeX = node.x;
+            const startNodeY = node.y;
+
+            let isActuallyDragging = false;
+            const dragThreshold = 5; // pixels to move before considering it a drag
+
+            function dragNode(moveEvent) {
+                // Get current coordinates based on event type
+                const currentX = moveEvent.type.includes('mouse') ? moveEvent.clientX : moveEvent.touches[0].clientX;
+                const currentY = moveEvent.type.includes('mouse') ? moveEvent.clientY : moveEvent.touches[0].clientY;
+
+                const dx = currentX - startX;
+                const dy = currentY - startY;
+
+                // Check if movement exceeds threshold
+                if (!isActuallyDragging && (Math.abs(dx) > dragThreshold || Math.abs(dy) > dragThreshold)) {
+                    isActuallyDragging = true;
+                }
+
+                if (isActuallyDragging) {
+                    node.x = startNodeX + dx;
+                    node.y = startNodeY + dy;
+
+                    const nodeElement = document.getElementById(node.id);
+                    if (nodeElement) {
+                        nodeElement.style.left = node.x + 'px';
+                        nodeElement.style.top = node.y + 'px';
+                    }
+
+                    updateConnections();
+
+                    // Prevent default to avoid text selection
+                    if (moveEvent.type === 'touchmove') {
+                        moveEvent.preventDefault();
+                    }
+                }
+            }
+
+            function stopDrag() {
+                document.removeEventListener('mousemove', dragNode);
+                document.removeEventListener('touchmove', dragNode);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchend', stopDrag);
+
+                // If it wasn't a drag, treat it as a click
+                if (!isActuallyDragging && e.type === 'touchstart') {
+                    // Trigger click event for the node
+                    const clickEvent = new Event('click', { bubbles: true });
+                    e.currentTarget.dispatchEvent(clickEvent);
+                }
+            }
+
+            document.addEventListener('mousemove', dragNode);
+            document.addEventListener('touchmove', dragNode, { passive: false });
+            document.addEventListener('mouseup', stopDrag);
             document.removeEventListener('touchend', stopDrag);
-        }
 
-        document.addEventListener('mousemove', dragNode);
-        document.addEventListener('touchmove', dragNode, { passive: false });
-        document.addEventListener('mouseup', stopDrag);
-        document.addEventListener('touchend', stopDrag);
-
-        if (e.type === 'mousedown') {
-            e.preventDefault();
+            if (e.type === 'mousedown') {
+                e.preventDefault();
+            }
         }
-    }
 
         // Start connecting nodes
         function startConnection(node) {
