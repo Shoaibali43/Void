@@ -315,6 +315,7 @@
             position: relative;
             overflow: hidden;
             min-height: 300px;
+             touch-action: none;
         }
 
         #connections-layer {
@@ -353,6 +354,9 @@
             z-index: 10;
             word-wrap: break-word;
             overflow: hidden;
+             touch-action: none; /* Prevents browser touch actions like scrolling */
+    -webkit-user-select: none; /* Prevents text selection on iOS */
+    user-select: none;
         }
 
         .flow-node:hover {
@@ -766,7 +770,8 @@
 
             .flow-node {
                 min-width: 90px;
-                max-width: 130px;
+                max-width: 130px;/* Larger touch targets */
+        min-height: 60px;
                 padding: 0.6rem;
                 font-size: 0.8rem;
             }
@@ -786,6 +791,11 @@
             .templates-panel {
                 grid-template-columns: 1fr;
             }
+            .node-action {
+        width: 24px; /* Larger touch buttons */
+        height: 24px;
+        font-size: 0.8rem;
+    }
         }
 
         @media (max-width: 480px) {
@@ -1298,9 +1308,13 @@
             });
             
             // Canvas interactions
+        // Canvas interactions for both mouse and touch
             nodesContainer.addEventListener('mousedown', startDrag);
+            nodesContainer.addEventListener('touchstart', startDragTouch, { passive: false });
             document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', dragTouch, { passive: false });
             document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
             nodesContainer.addEventListener('click', canvasClick);
             
             // Template cards
@@ -1348,6 +1362,7 @@
             nodeElement.style.top = node.y + 'px';
             nodeElement.style.borderColor = node.color;
             
+            
             nodeElement.innerHTML = `
                 <div class="node-header">
                     <span class="node-type">${node.type}</span>
@@ -1361,6 +1376,13 @@
             
             // Add event listeners to node
             nodeElement.addEventListener('mousedown', startNodeDrag);
+            nodeElement.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectNode(node);
+            });
+            // Add event listeners to node
+            nodeElement.addEventListener('mousedown', startNodeDrag);
+            nodeElement.addEventListener('touchstart', startNodeDrag, { passive: false });
             nodeElement.addEventListener('click', (e) => {
                 e.stopPropagation();
                 selectNode(node);
@@ -1420,46 +1442,63 @@
         }
 
         // Start dragging a node
-        function startNodeDrag(e) {
-            if (e.target.classList.contains('node-action')) return;
-            
-            const nodeId = e.currentTarget.id;
-            const node = nodes.find(n => n.id === nodeId);
-            if (!node) return;
-            
-            selectNode(node);
-            
-            const startX = e.clientX;
-            const startY = e.clientY;
-            const startNodeX = node.x;
-            const startNodeY = node.y;
-            
-            function dragNode(moveEvent) {
-                const dx = moveEvent.clientX - startX;
-                const dy = moveEvent.clientY - startY;
-                
-                node.x = startNodeX + dx;
-                node.y = startNodeY + dy;
-                
-                const nodeElement = document.getElementById(node.id);
-                if (nodeElement) {
-                    nodeElement.style.left = node.x + 'px';
-                    nodeElement.style.top = node.y + 'px';
-                }
-                
-                updateConnections();
-            }
-            
-            function stopDrag() {
-                document.removeEventListener('mousemove', dragNode);
-                document.removeEventListener('mouseup', stopDrag);
-            }
-            
-            document.addEventListener('mousemove', dragNode);
-            document.addEventListener('mouseup', stopDrag);
-            
+    // Start dragging a node (both mouse and touch)
+    function startNodeDrag(e) {
+        // Prevent default for touch events
+        if (e.type === 'touchstart') {
             e.preventDefault();
         }
+
+        if (e.target.classList.contains('node-action')) return;
+
+        const nodeId = e.currentTarget.id;
+        const node = nodes.find(n => n.id === nodeId);
+        if (!node) return;
+
+        selectNode(node);
+
+        // Get initial coordinates based on event type
+        const startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+        const startNodeX = node.x;
+        const startNodeY = node.y;
+
+        function dragNode(moveEvent) {
+            // Get current coordinates based on event type
+            const currentX = moveEvent.type.includes('mouse') ? moveEvent.clientX : moveEvent.touches[0].clientX;
+            const currentY = moveEvent.type.includes('mouse') ? moveEvent.clientY : moveEvent.touches[0].clientY;
+
+            const dx = currentX - startX;
+            const dy = currentY - startY;
+
+            node.x = startNodeX + dx;
+            node.y = startNodeY + dy;
+
+            const nodeElement = document.getElementById(node.id);
+            if (nodeElement) {
+                nodeElement.style.left = node.x + 'px';
+                nodeElement.style.top = node.y + 'px';
+            }
+
+            updateConnections();
+        }
+
+        function stopDrag() {
+            document.removeEventListener('mousemove', dragNode);
+            document.removeEventListener('touchmove', dragNode);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchend', stopDrag);
+        }
+
+        document.addEventListener('mousemove', dragNode);
+        document.addEventListener('touchmove', dragNode, { passive: false });
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchend', stopDrag);
+
+        if (e.type === 'mousedown') {
+            e.preventDefault();
+        }
+    }
 
         // Start connecting nodes
         function startConnection(node) {
@@ -1767,6 +1806,29 @@
             isDragging = false;
             nodesContainer.style.cursor = 'default';
         }
+
+        // Touch event handlers for mobile
+            function startDragTouch(e) {
+                if (e.target === nodesContainer) {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    isDragging = true;
+                    dragStart.x = touch.clientX - canvasOffset.x;
+                    dragStart.y = touch.clientY - canvasOffset.y;
+                    nodesContainer.style.cursor = 'grabbing';
+                }
+            }
+
+            function dragTouch(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+
+                const touch = e.touches[0];
+                canvasOffset.x = touch.clientX - dragStart.x;
+                canvasOffset.y = touch.clientY - dragStart.y;
+
+                applyZoom();
+            }
 
         function canvasClick(e) {
             if (e.target === nodesContainer) {
