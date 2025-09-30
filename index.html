@@ -87,6 +87,25 @@
             min-height: 100vh;
             padding: 20px 15px;
         }
+        
+.main-header {
+    width: 100%;
+    padding: 15px 20px;
+    color: rgb(187, 147, 110);
+    box-sizing: border-box;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.main-header span {
+    display: inline-block;
+    padding: 5px 10px; 
+    border: 1px solid rgba(187, 147, 110, 0.6);
+    border-radius: 3px; 
+}
+
 
         
         .logo {
@@ -427,6 +446,11 @@
     <div class="background-elements" id="backgroundElements"></div>
 
     <div class="container">
+        <a href="paper.html" style="color: inherit; text-decoration: none;">
+        <header class="main-header">
+            <span>Document Overview</span>
+        </header>
+        </a>
         <div class="logo">
             <h1> Void</h1>
             <p>Collective Problem Solving</p>
