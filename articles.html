@@ -278,7 +278,7 @@
             border: none;
             background: rgba(46, 46, 46, 0.671);
             backdrop-filter: blur(12px);
-            color: white;
+            color: black;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
@@ -544,6 +544,178 @@
          .menu-toggle {
             display: none;
         }
+        .add-article-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.add-article-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: rgba(31, 41, 55, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h3 {
+    color: white;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: white;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.cancel-btn,
+.submit-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
 
         
         @media (max-width: 992px) {
@@ -643,6 +815,19 @@
                 cursor: pointer;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             }
+              .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .cancel-btn,
+    .submit-btn {
+        width: 100%;
+    }
         }
 
         @media (max-width: 480px) {
@@ -887,6 +1072,10 @@
     <div class="main-content">
         <div class="header">
             <h2 class="page-title minimal">Research Library</h2>
+            <button class="add-article-btn" id="addArticleBtn">
+                <i class="fas fa-plus"></i>
+                Add Article
+            </button>
         </div>
 
         
@@ -924,6 +1113,64 @@
     <button id="scrollTopBtn" onclick="scrollToTop()">
         <i class="fa-solid fa-turn-up"></i>
     </button>
+
+    <!-- Add Article Modal -->
+    <div class="modal" id="addArticleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Research Article</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="articleForm" class="modal-body">
+                <div class="form-group">
+                    <label for="articleTitle">Article Title *</label>
+                    <input type="text" id="articleTitle" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="articleAuthor">Author Name *</label>
+                    <input type="text" id="articleAuthor" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="articleFindings">Research Findings Summary *</label>
+                    <textarea id="articleFindings" rows="4" required></textarea>
+                </div>
+    
+                <div class="form-group">
+                    <label for="articleTags">Tags (comma separated)</label>
+                    <input type="text" id="articleTags" placeholder="technology, science, research">
+                </div>
+    
+                <div class="form-group">
+                    <label for="articleCategory">Category *</label>
+                    <select id="articleCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="technology">Technology</option>
+                        <option value="science">Science</option>
+                        <option value="design">Religious</option>
+                        <option value="business">Health</option>
+                        <option value="health">Philosophy</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="articlePdfUrl">PDF URL *</label>
+                    <input type="url" id="articlePdfUrl" required placeholder="https://example.com/research.pdf">
+                </div>
+    
+                <div class="form-group">
+                    <label for="articleImageUrl">Cover Image URL (optional)</label>
+                    <input type="url" id="articleImageUrl" placeholder="https://example.com/image.jpg">
+                </div>
+    
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="submit-btn">Add Article</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -996,6 +1243,11 @@
         const categoryFilter = document.getElementById('categoryFilter');
         const sortFilter = document.getElementById('sortFilter');
         const articlesGrid = document.getElementById('articlesGrid');
+        const addArticleBtn = document.getElementById('addArticleBtn');
+            const addArticleModal = document.getElementById('addArticleModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const articleForm = document.getElementById('articleForm');
 
         // Initialize the application
         function initApp() {
@@ -1392,6 +1644,76 @@
                     behavior: "smooth"
                 });
             }
+            addArticleBtn.addEventListener('click', () => {
+                    addArticleModal.classList.add('show');
+                });
+
+                // Close modal
+                function closeArticleModal() {
+                    addArticleModal.classList.remove('show');
+                    articleForm.reset();
+                }
+
+                closeModal.addEventListener('click', closeArticleModal);
+                cancelBtn.addEventListener('click', closeArticleModal);
+
+                // Close modal when clicking outside
+                addArticleModal.addEventListener('click', (e) => {
+                    if (e.target === addArticleModal) {
+                        closeArticleModal();
+                    }
+                });
+
+                // Handle form submission
+                articleForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const submitBtn = articleForm.querySelector('.submit-btn');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Adding...';
+
+                    try {
+                        const articleData = {
+                            title: document.getElementById('articleTitle').value.trim(),
+                            author: document.getElementById('articleAuthor').value.trim(),
+                            findings: document.getElementById('articleFindings').value.trim(),
+                            tags: document.getElementById('articleTags').value
+                                .split(',')
+                                .map(tag => tag.trim())
+                                .filter(tag => tag !== ''),
+                            category: document.getElementById('articleCategory').value,
+                            pdfUrl: document.getElementById('articlePdfUrl').value.trim(),
+                            imageUrl: document.getElementById('articleImageUrl').value.trim() || null,
+                            publishedDate: new Date(),
+                            downloads: 0,
+                            views: 0,
+                            createdBy: currentUser.uid,
+                            createdAt: new Date()
+                        };
+
+                        // Validate required fields
+                        if (!articleData.title || !articleData.author || !articleData.findings ||
+                            !articleData.category || !articleData.pdfUrl) {
+                            throw new Error('Please fill in all required fields');
+                        }
+
+                        // Add to Firestore
+                        await db.collection('researchArticles').add(articleData);
+
+                        showToast('Article added successfully!', 'success');
+                        closeArticleModal();
+
+                        // Reload articles to show the new one
+                        loadArticles();
+
+                    } catch (error) {
+                        console.error('Error adding article:', error);
+                        showToast(error.message || 'Error adding article', 'error');
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Add Article';
+                    }
+                });
 
         // Initialize the app when the page loads
         document.addEventListener('DOMContentLoaded', initApp);
@@ -1399,4 +1721,3 @@
 </body>
 
 </html>
-
