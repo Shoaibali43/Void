@@ -10,14 +10,12 @@
   <meta name="author" content="Shoaib Ali" />
   <link rel="icon" type="image/png" href="images.png">
   
-  
   <meta property="og:title" content="Void" />
   <meta property="og:description" content="Social Network for a World of Problem-Solvers." />
   <meta property="og:image" content="https://shoaibali43.github.io/Void/images.png" />
   <meta property="og:url" content="https://www.projectvoid.in" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Void" />
-  
   
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Void" />
@@ -57,7 +55,6 @@
       display: flex;
     }
 
-    
     .spinner {
       border: 4px solid rgba(0, 0, 0, 0.1);
       border-left-color: #d1a152;
@@ -75,7 +72,6 @@
       }
     }
 
-    
     .sidebar {
       width: 260px;
       background: transparent;
@@ -223,7 +219,6 @@
       margin-right: 0.5rem;
     }
 
-    
     .main-content {
       flex: 1;
       margin-left: 260px;
@@ -259,66 +254,64 @@
       font-size: 1rem;
     }
 
-.page-title.minimal {
-    background: linear-gradient(135deg, rgb(247, 211, 146), rgb(252, 215, 146));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: 
-        minimalEntrance 1s ease-out forwards,
-        minimalShimmer 4s ease-in-out infinite;
-    padding: 0.25rem 0.5rem;
-}
-
-@keyframes minimalEntrance {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-        letter-spacing: 5px;
+    .page-title.minimal {
+      background: linear-gradient(135deg, rgb(247, 211, 146), rgb(252, 215, 146));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: 
+          minimalEntrance 1s ease-out forwards,
+          minimalShimmer 4s ease-in-out infinite;
+      padding: 0.25rem 0.5rem;
     }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-        letter-spacing: normal;
-    }
-}
 
-@keyframes minimalShimmer {
-    0%, 100% {
-        background-position: 0% center;
-        filter: brightness(1);
+    @keyframes minimalEntrance {
+      0% {
+          opacity: 0;
+          transform: translateX(-20px);
+          letter-spacing: 5px;
+      }
+      100% {
+          opacity: 1;
+          transform: translateX(0);
+          letter-spacing: normal;
+      }
     }
-    50% {
-        background-position: 100% center;
-        filter: brightness(1.2);
+
+    @keyframes minimalShimmer {
+      0%, 100% {
+          background-position: 0% center;
+          filter: brightness(1);
+      }
+      50% {
+          background-position: 100% center;
+          filter: brightness(1.2);
+      }
     }
-}
 
-.page-title.minimal::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: wheat;
-    animation: minimalUnderline 1.2s ease-out 0.5s forwards;
-}
-
-@keyframes minimalUnderline {
-    0% {
-        width: 0;
-        left: 50%;
+    .page-title.minimal::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: wheat;
+      animation: minimalUnderline 1.2s ease-out 0.5s forwards;
     }
-    100% {
-        width: 100%;
-        left: 0;
+
+    @keyframes minimalUnderline {
+      0% {
+          width: 0;
+          left: 50%;
+      }
+      100% {
+          width: 100%;
+          left: 0;
+      }
     }
-}
 
-
-    
     .create-post {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(12px);
@@ -352,12 +345,10 @@
       color: white;
     }
 
-    
     .create-post.expanded .collapse-icon i {
       transform: rotate(180deg);
     }
 
-    
     .create-post-body {
       max-height: 0;
       overflow: hidden;
@@ -370,7 +361,6 @@
       padding: 1rem 1.5rem;
     }
 
-    
     .post-input,
     .tags-input {
       width: 100%;
@@ -421,7 +411,6 @@
       color: rgba(255, 255, 255, 0.76);
     }
 
-    
     .problem-feed {
       display: flex;
       flex-direction: column;
@@ -546,7 +535,7 @@
       color: var(--gray);
       cursor: pointer;
       transition: all 0.2s;
-      padding: 0.25rem 0.5rem;
+      padding: 0.25rem 0.25rem;
       border-radius: 6px;
     }
 
@@ -580,6 +569,14 @@
       color: var(--primary);
     }
 
+    .action-btn.delete-btn {
+      color: var(--error);
+    }
+
+    .action-btn.delete-btn:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
     .solved-badge {
       position: absolute;
       bottom: 0.5rem;
@@ -595,7 +592,6 @@
       gap: 0.3rem;
     }
 
-    
     .answers {
       margin-top: 1rem;
       padding-top: 1rem;
@@ -618,7 +614,7 @@
       resize: none;
       overflow: hidden;
       box-sizing: border-box;
-        }
+    }
 
     .answer-input:focus {
       outline: none;
@@ -668,10 +664,11 @@
       font-size: 0.95rem;
       line-height: 1.5;
     }
- .menu-toggle {
+
+    .menu-toggle {
       display: none;
     }
-    
+
     @media (max-width: 992px) {
       .sidebar {
         width: 80px;
@@ -706,9 +703,8 @@
         margin-left: 80px;
       }
       .logout-btn span{
-                display: none;
-
-            }
+        display: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -717,45 +713,42 @@
         margin-left: 0;
       }
 
-     .sidebar {
-    width: 260px; 
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  
-  .sidebar.active {
-    transform: translateX(0);
-    z-index: 1200;
-    background-color: #000000;
-  }
+      .sidebar {
+        width: 260px; 
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+        z-index: 1200;
+        background-color: #000000;
+      }
 
-  .sidebar.active .trending-tags {
-    display: block; 
-  }
-  .user-info span {
-    display: inline;
-  }
+      .sidebar.active .trending-tags {
+        display: block; 
+      }
+      .user-info span {
+        display: inline;
+      }
 
-  
-  .nav-item {
-    justify-content: flex-start; 
-    padding: 0.75rem 1rem; 
-  }
+      .nav-item {
+        justify-content: flex-start; 
+        padding: 0.75rem 1rem; 
+      }
 
-  
-  .nav-item span {
-    display: inline; 
-    margin-left: 0.75rem; 
-  }
-  .problem-card {
-      padding: 1rem;
-     font-size: 14px;
-  }
+      .nav-item span {
+        display: inline; 
+        margin-left: 0.75rem; 
+      }
+      .problem-card {
+        padding: 1rem;
+        font-size: 14px;
+      }
 
-  
-  .menu-toggle {
-    display: flex;
-  }
+      .menu-toggle {
+        display: flex;
+      }
       .header {
         flex-direction: column;
         align-items: flex-start;
@@ -783,7 +776,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       }
       .logout-btn {
-    justify-content: center;
+        justify-content: center;
       }
 
       .solved-badge {
@@ -799,15 +792,7 @@
       .page-title {
         font-size: 1.5rem;
         padding: 0.25rem 0.5rem;
-    }
-    
-    .page-title::before {
-        top: -5px;
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
-    }
-      
+      }
     }
 
     @keyframes fadeIn {
@@ -815,7 +800,6 @@
         opacity: 0;
         transform: translateY(10px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -826,7 +810,6 @@
       animation: fadeIn 0.4s ease;
     }
 
-    
     .toast {
       position: fixed;
       bottom: 20px;
@@ -861,44 +844,128 @@
       background: var(--error);
     }
 
-   #scrollTopBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 99;
-  color: wheat;
-  border: none;
-  padding: 12px;
-  border-radius: 20%;
-  font-size: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-
-  /* Transparent blurred background */
-  background-color: rgba(255, 255, 255, 0.1); /* slight tint so blur is visible */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      color: wheat;
+      border: none;
+      padding: 12px;
+      border-radius: 20%;
+      font-size: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
 
     #scrollTopBtn:hover {
       background-color: rgb(243, 188, 85);
+    }
+
+    /* Delete Confirmation Modal */
+    .delete-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .delete-modal-content {
+      background: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .delete-modal h3 {
+      margin-bottom: 1rem;
+      color: wheat;
+      font-size: 1.3rem;
+    }
+
+    .delete-modal p {
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      color: #ccc;
+    }
+
+    .delete-modal-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .delete-confirm-btn {
+      background: var(--error);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .delete-confirm-btn:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+
+    .delete-cancel-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .delete-cancel-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
     }
   </style>
 </head>
 
 <body>
-  
   <div class="menu-toggle" id="menuToggle">
-  <i class="fa-solid fa-cube"></i>
+    <i class="fa-solid fa-cube"></i>
   </div>
 
-  
   <div class="toast" id="toast"></div>
 
-  
+  <!-- Delete Confirmation Modal -->
+  <div class="delete-modal" id="deleteModal">
+    <div class="delete-modal-content">
+      <h3><i class="fas fa-exclamation-triangle"></i> Delete Problem</h3>
+      <p>Are you sure you want to delete this problem? This action cannot be undone and all associated answers will also be deleted.</p>
+      <div class="delete-modal-actions">
+        <button class="delete-cancel-btn" id="deleteCancelBtn">Cancel</button>
+        <button class="delete-confirm-btn" id="deleteConfirmBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
   <div class="sidebar" id="sidebar">
     <div class="logo">
       <i class="fa-solid fa-cube"></i>
@@ -911,45 +978,45 @@
     </div>
 
     <a href="users.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fas fa-users"></i>
-      <span>Users</span>
-    </div>
+      <div class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Users</span>
+      </div>
     </a>
 
-<a href="chain.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fas fa-link"></i>
-      <span>Synaptic Chain</span>
-    </div>
+    <a href="chain.html" style="color: inherit; text-decoration: none;">
+      <div class="nav-item">
+        <i class="fas fa-link"></i>
+        <span>Synaptic Chain</span>
+      </div>
     </a>
 
-<a href="profile.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fas fa-user"></i>
-      <span>My Profile</span>
-    </div>
+    <a href="profile.html" style="color: inherit; text-decoration: none;">
+      <div class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>My Profile</span>
+      </div>
     </a>
 
     <a href="timeline.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fas fa-calendar-alt"></i>
-      <span>Timeline</span>
-    </div>
+      <div class="nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Timeline</span>
+      </div>
     </a>
 
     <a href="status.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fa-solid fa-water"></i>
-      <span>Wave</span>
-    </div>
+      <div class="nav-item">
+        <i class="fa-solid fa-water"></i>
+        <span>Wave</span>
+      </div>
     </a>
 
     <a href="Saved.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fa-solid fa-dna"></i>
-      <span>Sequence</span>
-    </div>
+      <div class="nav-item">
+        <i class="fa-solid fa-dna"></i>
+        <span>Sequence</span>
+      </div>
     </a>
 
     <a href="personal.html" style="color: inherit; text-decoration: none;">
@@ -959,11 +1026,11 @@
       </div>
     </a>
 
-<a href="articles.html" style="color: inherit; text-decoration: none;">
-    <div class="nav-item">
-      <i class="fas fa-book-open"></i>
-    <span>Research Library</span>
-    </div>
+    <a href="articles.html" style="color: inherit; text-decoration: none;">
+      <div class="nav-item">
+        <i class="fas fa-book-open"></i>
+        <span>Research Library</span>
+      </div>
     </a>
 
     <a href="node.html" style="color: inherit; text-decoration: none;">
@@ -973,35 +1040,42 @@
       </div>
     </a>
 
+    <a href="course.html" style="color: inherit; text-decoration: none;">
+      <div class="nav-item">
+        <i class="fas fa-video"></i>
+        <span>Course Videos</span>
+      </div>
+    </a>
+
     <hr style="margin: 0; border: 0; border-top: 1px solid #ccc;">
 
     <a href="time.html" style="color: inherit; text-decoration: none; font-size: 14px;">
-    <div class="nav-item">
-      <i class="fas fa-clock" style="font-size: 14px;"></i>
-      <span>Time Insights</span>
-    </div>
+      <div class="nav-item">
+        <i class="fas fa-clock" style="font-size: 14px;"></i>
+        <span>Time Insights</span>
+      </div>
     </a>
 
-<a href="feature.html" style="color: inherit; text-decoration: none; font-size: 14px;">
-    <div class="nav-item">
-      <i class="fas fa-lightbulb" style="font-size: 14px;"></i>
-      <span>Feature Requests</span>
-    </div>
+    <a href="feature.html" style="color: inherit; text-decoration: none; font-size: 14px;">
+      <div class="nav-item">
+        <i class="fas fa-lightbulb" style="font-size: 14px;"></i>
+        <span>Feature Requests</span>
+      </div>
     </a>
 
     <a href="settings.html" style="color: inherit; text-decoration: none;font-size: 14px;">
-    <div class="nav-item">
-      <i class="fas fa-cog" style="font-size: 14px;"></i>
-      <span>Settings</span>
-    </div>
+      <div class="nav-item">
+        <i class="fas fa-cog" style="font-size: 14px;"></i>
+        <span>Settings</span>
+      </div>
     </a>
 
-<a href="about.html" style="color: inherit; text-decoration: none;font-size: 14px;">
-  <div class="nav-item">
-    <i class="fa-solid fa-terminal" style="font-size: 14px;"></i>
-    <span>About</span>
-  </div>
-</a>
+    <a href="about.html" style="color: inherit; text-decoration: none;font-size: 14px;">
+      <div class="nav-item">
+        <i class="fa-solid fa-terminal" style="font-size: 14px;"></i>
+        <span>About</span>
+      </div>
+    </a>
 
     <div class="trending-tags">
       <h3>Trending Tags</h3>
@@ -1022,7 +1096,6 @@
     </div>
   </div>
 
-  
   <div class="main-content">
     <div class="header">
       <h2 class="page-title minimal">Problem Feed</h2>
@@ -1032,7 +1105,6 @@
       </div>
     </div>
 
-    
     <div class="create-post" id="createPost">
       <div class="create-post-header" id="togglePost">
         <h3>Post a Problem <i class="fa fa-pencil"></i></h3>
@@ -1050,62 +1122,58 @@
       </div>
     </div>
 
-    
     <div class="spinner" id="loadingSpinner"></div>
 
-    
     <div class="problem-feed" id="problemFeed">
-      
+      <!-- Problems will be loaded here -->
     </div>
   </div>
 
   <button id="scrollTopBtn" onclick="scrollToTop()">
-  <i class="fa-solid fa-turn-up"></i>
+    <i class="fa-solid fa-turn-up"></i>
   </button>
 
-  
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script>
+    const currentPage = "dashboard";
+    let startTime = Date.now();
 
-  const currentPage = "dashboard";
-  let startTime = Date.now();
+    // Load previous value
+    let storedTime = parseInt(localStorage.getItem(`time_${currentPage}`)) || 0;
 
-  // Load previous value
-  let storedTime = parseInt(localStorage.getItem(`time_${currentPage}`)) || 0;
+    // Track today's time
+    const today = new Date().toDateString();
+    let todayStoredTime = parseInt(localStorage.getItem(`time_${currentPage}_${today}`)) || 0;
 
-  // Track today's time
-  const today = new Date().toDateString();
-  let todayStoredTime = parseInt(localStorage.getItem(`time_${currentPage}_${today}`)) || 0;
+    setInterval(() => {
+      let secondsOnPage = Math.floor((Date.now() - startTime) / 1000);
 
-  setInterval(() => {
-    let secondsOnPage = Math.floor((Date.now() - startTime) / 1000);
+      // Update total time for this page
+      storedTime += secondsOnPage;
+      localStorage.setItem(`time_${currentPage}`, storedTime);
 
-    // Update total time for this page
-    storedTime += secondsOnPage;
-    localStorage.setItem(`time_${currentPage}`, storedTime);
+      // Update today's time
+      todayStoredTime += secondsOnPage;
+      localStorage.setItem(`time_${currentPage}_${today}`, todayStoredTime);
 
-    // Update today's time
-    todayStoredTime += secondsOnPage;
-    localStorage.setItem(`time_${currentPage}_${today}`, todayStoredTime);
+      // Reset start time
+      startTime = Date.now();
+    }, 10000);
 
-    // Reset start time
-    startTime = Date.now();
-  }, 10000);
+    window.addEventListener('beforeunload', () => {
+      let secondsOnPage = Math.floor((Date.now() - startTime) / 1000);
+      storedTime += secondsOnPage;
+      todayStoredTime += secondsOnPage;
 
-  window.addEventListener('beforeunload', () => {
-    let secondsOnPage = Math.floor((Date.now() - startTime) / 1000);
-    storedTime += secondsOnPage;
-    todayStoredTime += secondsOnPage;
+      localStorage.setItem(`time_${currentPage}`, storedTime);
+      localStorage.setItem(`time_${currentPage}_${today}`, todayStoredTime);
+    });
 
-    localStorage.setItem(`time_${currentPage}`, storedTime);
-    localStorage.setItem(`time_${currentPage}_${today}`, todayStoredTime);
-  });
-
-    // Firebase Configuration (replace with your actual config)
+    // Firebase Configuration
     const firebaseConfig = {
-     apiKey: "AIzaSyAxQoFW6QiaazIcvkEPsYbnTv7zfKe8c-Y",
+      apiKey: "AIzaSyAxQoFW6QiaazIcvkEPsYbnTv7zfKe8c-Y",
       authDomain: "patternetweb.firebaseapp.com",
       projectId: "patternetweb",
       storageBucket: "patternetweb.firebasestorage.app",
@@ -1125,6 +1193,7 @@
     let userVotes = {};
     let userBookmarks = {};
     let trendingTags = [];
+    let problemToDelete = null;
 
     // DOM Elements
     const menuToggle = document.getElementById('menuToggle');
@@ -1140,6 +1209,9 @@
     const sidebarUsername = document.getElementById('sidebar-username');
     const toast = document.getElementById('toast');
     const trendingTagsContainer = document.getElementById('trending-tags-container');
+    const deleteModal = document.getElementById('deleteModal');
+    const deleteCancelBtn = document.getElementById('deleteCancelBtn');
+    const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
 
     problemInput.addEventListener("input", function () {
       this.style.height = "auto";
@@ -1147,8 +1219,8 @@
     });
 
     postBtn.addEventListener("click", function () {
-        problemInput.style.height = "";
-      });
+      problemInput.style.height = "";
+    });
 
     const createPost = document.getElementById('createPost');
     const togglePost = document.getElementById('togglePost');
@@ -1156,6 +1228,14 @@
     togglePost.addEventListener('click', () => {
       createPost.classList.toggle('expanded');
     });
+
+    // Delete modal event listeners
+    deleteCancelBtn.addEventListener('click', () => {
+      deleteModal.style.display = 'none';
+      problemToDelete = null;
+    });
+
+    deleteConfirmBtn.addEventListener('click', deleteProblemConfirmed);
 
     // Initialize the application
     function initApp() {
@@ -1412,6 +1492,11 @@
             <span>${isSolved ? 'Solved' : 'Mark Solved'}</span>
           </button>
           ` : ''}
+          ${isProblemOwner ? `
+          <button class="action-btn delete-btn" data-id="${problem.id}">
+            <i class="fas fa-trash"></i>
+          </button>
+          ` : ''}
           <button class="action-btn bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" data-id="${problem.id}">
             <i class="${isBookmarked ? 'fas' : 'far'} fa-solid fa-dna"></i>
           </button>
@@ -1431,12 +1516,13 @@
       const downvoteBtn = problemElement.querySelector('.downvote-btn');
       const commentBtn = problemElement.querySelector('.comment-btn');
       const solveBtn = problemElement.querySelector('.solve-btn');
+      const deleteBtn = problemElement.querySelector('.delete-btn');
       const bookmarkBtn = problemElement.querySelector('.bookmark-btn');
       const answerBtn = problemElement.querySelector('.answer-btn');
       const answerInput = problemElement.querySelector('.answer-input');
       const tags = problemElement.querySelectorAll('.problem-tag');
 
-       answerInput.addEventListener("input", function () {
+      answerInput.addEventListener("input", function () {
         this.style.height = "auto";
         this.style.height = this.scrollHeight + "px";
       });
@@ -1446,6 +1532,9 @@
       commentBtn.addEventListener('click', () => toggleAnswers(problem.id));
       if (solveBtn) {
         solveBtn.addEventListener('click', () => toggleSolved(problem.id));
+      }
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => showDeleteModal(problem.id));
       }
       bookmarkBtn.addEventListener('click', () => bookmarkProblem(problem.id));
       answerBtn.addEventListener('click', () => postAnswer(problem.id, answerInput));
@@ -1463,6 +1552,62 @@
 
       return problemElement;
     }
+
+    // Show delete confirmation modal
+    function showDeleteModal(problemId) {
+      problemToDelete = problemId;
+      deleteModal.style.display = 'flex';
+    }
+
+    // Delete problem after confirmation
+      async function deleteProblemConfirmed() {
+        if (!problemToDelete) return;
+
+        // Close the modal immediately
+        deleteModal.style.display = 'none';
+
+        try {
+          // Delete the problem
+          await db.collection('problems').doc(problemToDelete).delete();
+
+          // Delete associated answers
+          const answersSnapshot = await db.collection('answers')
+            .where('problemId', '==', problemToDelete)
+            .get();
+
+          const deletePromises = [];
+          answersSnapshot.forEach(doc => {
+            deletePromises.push(db.collection('answers').doc(doc.id).delete());
+          });
+
+          // Delete associated votes
+          const votesSnapshot = await db.collection('votes')
+            .where('problemId', '==', problemToDelete)
+            .get();
+
+          votesSnapshot.forEach(doc => {
+            deletePromises.push(db.collection('votes').doc(doc.id).delete());
+          });
+
+          // Delete associated bookmarks
+          const bookmarksSnapshot = await db.collection('bookmarks')
+            .where('problemId', '==', problemToDelete)
+            .get();
+
+          bookmarksSnapshot.forEach(doc => {
+            deletePromises.push(db.collection('bookmarks').doc(doc.id).delete());
+          });
+
+          await Promise.all(deletePromises);
+
+          showToast('Problem deleted successfully!', 'success');
+          problemToDelete = null;
+        } catch (error) {
+          console.error('Error deleting problem:', error);
+          showToast('Error deleting problem', 'error');
+          problemToDelete = null;
+        }
+      }
 
     // Toggle answers visibility
     function toggleAnswers(problemId) {
@@ -1825,6 +1970,4 @@
     document.addEventListener('DOMContentLoaded', initApp);
   </script>
 </body>
-
 </html>
-
